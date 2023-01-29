@@ -1,9 +1,10 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const dataEncryption = require('./data_encryption');
+const dataEncryption = require('../data_encryption');
 
-const userFormat = require('./database_user_format');
-const userPlaylistFormat = require('./database_user_playlist_format');
-const generalPlaylistFormat = require('./database_general_playlist_format');
+const userFormat = require('../db_format/database_user_format');
+const userPlaylistFormat = require('../db_format/database_user_playlist_format');
+const generalPlaylistFormat = require('../db_format/database_general_playlist_format');
+const spesificMusicFormat = require('../db_format/database_spesific_music');
 
 var myClient = null;
 
@@ -60,4 +61,18 @@ const readUserAccount = async (email) => {
     }
 }
 
-module.exports = { createDatabaeConnection, insertNewUserAccount, readUserAccount };
+const readAllUserAccount = async () => {
+    if (myClient == null) return console.log("Connect first to database");
+
+    let result = await myClient.db(databaseName).collection("user").find({}).toArray();
+
+    if (result) return result;
+    else return false;
+}
+
+module.exports = { 
+    createDatabaeConnection, 
+    insertNewUserAccount, 
+    readUserAccount,
+    readAllUserAccount
+};

@@ -1,4 +1,4 @@
-const {encrypt} = require('./data_encryption');
+const {encrypt} = require('../data_encryption');
 
 const format = {
     "_id": "0000",
