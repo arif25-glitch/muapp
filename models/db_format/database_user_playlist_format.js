@@ -1,8 +1,8 @@
-const format = {
-    "_id": "adam@mail.com",
-    "music": [
-        "m0001", "m0002"
-    ]
+class format {
+    constructor (email, musics) {
+        this._id = email;
+        this.musics = [];
+    }
 }
 
 module.exports = format;

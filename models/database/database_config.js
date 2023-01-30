@@ -1,16 +1,8 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const dataEncryption = require('../data_encryption');
 
-const userFormat = require('../db_format/database_user_format');
-const userPlaylistFormat = require('../db_format/database_user_playlist_format');
-const generalPlaylistFormat = require('../db_format/database_general_playlist_format');
-const spesificMusicFormat = require('../db_format/database_spesific_music');
+const db_controller = require('../../controller/db_controller');
 
-var myClient = null;
-
-var databaseName = "muapp";
-
-const createDatabaeConnection = async () => {
+const createDBConnection = () => {
     const password = 'wUfpxbIxnhyfUrnR';
 
     const uri = `mongodb+srv://aDm1n-use:${password}@mu-app.tt1c6tj.mongodb.net/?retryWrites=true&w=majority`;
@@ -25,54 +17,19 @@ const createDatabaeConnection = async () => {
         console.log('database error connection ' + err);
     });
 
-    myClient = client;
+    return client;
 }
 
-const insertNewUserAccount = async (username, email, password) => {
-    if (myClient == null) return console.log("Connect first to database");
-
-    let result = false;
-    let format = userFormat;
-
-    format._id = email;
-    format.username = username;
-    format.password = dataEncryption.encrypt(password);
-
-    await myClient.db(databaseName).collection("user").insertOne(format)
-    .then(() => {
-        result = true;
-    })
-    .catch((err) => {
-        result = false;
-    })
-
-    return result;
-}
-
-const readUserAccount = async (email) => {
-    if (myClient == null) return console.log("Connect first to database");
-
-    let result = await myClient.db(databaseName).collection("user").findOne({"_id": email});
-
-    if (result) {
-        return result;
-    } else {
-        return false;
-    }
-}
-
-const readAllUserAccount = async () => {
-    if (myClient == null) return console.log("Connect first to database");
-
-    let result = await myClient.db(databaseName).collection("user").find({}).toArray();
-
-    if (result) return result;
-    else return false;
-}
+const createUserAccount = db_controller.user.create;
+const readUserAccount = db_controller.user.read;
+const readAllUserAccount = db_controller.user.readAll;
+const updateUserAccount = db_controller.user.update;
 
 module.exports = { 
-    createDatabaeConnection, 
-    insertNewUserAccount, 
+    createDBConnection, 
+    
+    createUserAccount, 
     readUserAccount,
-    readAllUserAccount
+    readAllUserAccount,
+    updateUserAccount
 };

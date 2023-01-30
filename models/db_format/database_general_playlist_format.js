@@ -1,10 +1,12 @@
-const format = {
-    "_id": "m0001",
-    "title": "title",
-    "author": "author",
-    "time": "03:20",
-    "image_thumb": "http://example.thumbnail.com",
-    "genres": "genres",
+class format {
+    constructor (id, title, author, time, image_thumb, genres) {
+        this._id = id;
+        this.title = title;
+        this.author = author;
+        this.time = time;
+        this.image_thumb = image_thumb;
+        this.genres = genres;
+    }
 }
 
 module.exports = format;

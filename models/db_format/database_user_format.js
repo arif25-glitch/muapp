@@ -1,9 +1,11 @@
 const {encrypt} = require('../data_encryption');
 
-const format = {
-    "_id": "0000",
-    "username": "adam",
-    "password": encrypt("adam")
-};
+class format {
+    constructor(email, username, password) {
+        this._id = email;
+        this.username = username;
+        this.password = encrypt(password);
+    }
+}
 
 module.exports = format;
