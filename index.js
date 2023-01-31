@@ -1,12 +1,14 @@
 const express = require('express');
 const http = require('http');
 const route = require('./routes/index');
+const upload = require('express-fileupload');
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(express.static('public'));
 app.use(express.json({limit: "1mb"}));
+app.use(upload());
 app.use(route);
 
 const port = process.env.PORT || 3000;

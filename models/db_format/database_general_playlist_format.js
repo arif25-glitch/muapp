@@ -1,8 +1,8 @@
 const {sha256} = require('../data_encryption');
 
 class format {
-    constructor (title, author, time, image_thumb, genres) {
-        this._id = sha256(title);
+    constructor (id, title, author, time, image_thumb, genres) {
+        this._id = sha256(id);
         this.title = title;
         this.author = author;
         this.time = time;

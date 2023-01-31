@@ -28,8 +28,14 @@ const deleteUserAccount = db_controller.user.delete;
 
 const adminCreateMusic = db_controller.admin.musicCreate;
 
+const musicRead = db_controller.music.read;
+const musicReadList = db_controller.music.readAll;
+
 module.exports = { 
     createDBConnection, 
+
+    musicRead,
+    musicReadList,
     
     createUserAccount, 
     readUserAccount,

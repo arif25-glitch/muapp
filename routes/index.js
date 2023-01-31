@@ -3,7 +3,9 @@ const {controller} = require('../controller/route_controller');
 
 // routing for music
 route.get("/music-play", controller.music.play);
+route.get("/music-read", controller.music.read);
 route.get("/music-list", controller.music.list);
+route.get("/music-read-image", controller.music.readImage);
 
 // routing for user
 route.get("/user-read-all", controller.user.read_all);
@@ -24,4 +26,4 @@ route.post("*", (req, res) => {
     res.json({"message": "no api here"});   
 });
 
-module.exports = route
+module.exports = route;
