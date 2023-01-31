@@ -7,7 +7,7 @@ const controller = {
         play: async (req, res) => {
             if (req.query.music_id == null) return res.json({"message": "music_id needed"});
             res.statusCode = 302;
-            res.setHeader("Location", `./musics/${req.query.music_id}.mp3`);
+            res.setHeader("Location", `musics/${req.query.music_id}.mp3`);
             res.end();
         },
         read: async (req, res) => {
@@ -33,7 +33,7 @@ const controller = {
         readImage: async (req, res) => {
             if (req.query.image_id == null) return res.json({"message": "image_id needed"});
             res.statusCode = 302;
-            res.setHeader("Location", `./images/${req.query.image_id}.jpg`);
+            res.setHeader("Location", `images/${req.query.image_id}.jpg`);
             res.end();
         }
     },

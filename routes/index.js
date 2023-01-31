@@ -16,7 +16,7 @@ route.post("/api/user-update", controller.user.crud.update);
 route.post("/api/user-delete", controller.user.crud.delete);
 
 // routing for admin
-route.post("/admin-music-create", controller.admin.crud.music.create);
+route.post("/api/admin-music-create", controller.admin.crud.music.create);
 
 // else routing
 route.get("*", (req, res) => {
