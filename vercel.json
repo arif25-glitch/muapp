@@ -9,8 +9,8 @@
     ],
     "rewrites": [
         {
-            "source": "/(.*)",
-            "destination": "/public"
+            "source": "/api/(.*)",
+            "destination": "/api"
         }
     ]
 }
