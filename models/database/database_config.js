@@ -24,6 +24,9 @@ const createUserAccount = db_controller.user.create;
 const readUserAccount = db_controller.user.read;
 const readAllUserAccount = db_controller.user.readAll;
 const updateUserAccount = db_controller.user.update;
+const deleteUserAccount = db_controller.user.delete;
+
+const adminCreateMusic = db_controller.admin.musicCreate;
 
 module.exports = { 
     createDBConnection, 
@@ -31,5 +34,8 @@ module.exports = {
     createUserAccount, 
     readUserAccount,
     readAllUserAccount,
-    updateUserAccount
+    updateUserAccount,
+    deleteUserAccount,
+
+    adminCreateMusic
 };

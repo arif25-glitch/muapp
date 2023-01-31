@@ -60,10 +60,41 @@ const database = {
             })
         
             return result;
+        },
+        delete: async (connection, email) => {
+            if (connection == null) return console.log("Connect first to database");
+
+            let result = false;
+
+            await connection.db(databaseName).collection("user").deleteOne({
+                _id: email
+            })
+            .then((tempResult) => {
+                if (tempResult) {
+                    result = true;
+                }
+            });
+            
+            return result;
         }
     },
     admin: {
+        musicCreate: async (connection, title, author, time, image, genres) => {
+            if (connection == null) return console.log("Connect first to database");
+            
+            let result = false;
+            let format = new generalPlaylistFormat(title, author, time, image, genres);
 
+            await connection.db(databaseName).collection("general-playlist").insertOne(format)
+            .then(() => {
+                result = true;
+            })
+            .catch((err) => {
+                result = false;
+            })
+        
+            return result;
+        }
     }
 }
 
