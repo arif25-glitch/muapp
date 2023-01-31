@@ -4,11 +4,5 @@
             "source": "/(.*)",
             "destination": "/public"
         }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "index.js"
-        }
     ]
 }
