@@ -19,11 +19,11 @@ route.post("/user-delete", controller.user.crud.delete);
 route.post("/admin-music-create", controller.admin.crud.music.create);
 
 // else routing
-route.get("*", (req, res) => {
-    res.json({"message": "no api here"});
-});
-route.post("*", (req, res) => {
-    res.json({"message": "no api here"});   
-});
+// route.get("*", (req, res) => {
+//     res.json({"message": "no api here"});
+// });
+// route.post("*", (req, res) => {
+//     res.json({"message": "no api here"});   
+// });
 
 module.exports = route;
