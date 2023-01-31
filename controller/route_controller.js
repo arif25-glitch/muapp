@@ -7,7 +7,8 @@ const controller = {
         play: async (req, res) => {
             if (req.query.music_id == null) return res.json({"message": "music_id needed"});
             res.statusCode = 302;
-            res.setHeader("Location", `musics/${req.query.music_id}.mp3`);
+            res.setHeader("Location", `../musics/${req.query.music_id}.mp3`); // for vercel
+            res.setHeader("Location", `./musics/${req.query.music_id}.mp3`); // for localhost
             res.end();
         },
         read: async (req, res) => {
