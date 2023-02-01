@@ -34,7 +34,7 @@ const controller = {
         readImage: async (req, res) => {
             if (req.query.image_id == null) return res.json({"message": "image_id needed"});
             res.statusCode = 302;
-            res.setHeader("Location", `images/${req.query.image_id}.jpg`);
+            res.setHeader("Location", `../images/${req.query.image_id}.jpg`);
             res.end();
         }
     },
