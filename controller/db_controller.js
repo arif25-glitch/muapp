@@ -105,10 +105,10 @@ const database = {
             let result = false;
             let format = new generalPlaylistFormat(musicFile.name, title, author, time, image.name, genres);
 
-            musicFile.mv("" + format._id + ".mp3", (err) => {
+            musicFile.mv("./public/musics/" + format._id + ".mp3", (err) => {
                 if(err) console.log(err);
             });
-            image.mv("" + format.image_thumb + ".jpg", (err) => {
+            image.mv("./public/images/" + format.image_thumb + ".jpg", (err) => {
                 if(err) console.log(err);
             });
 
