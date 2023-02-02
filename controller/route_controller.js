@@ -8,7 +8,6 @@ const controller = {
             if (req.query.music_id == null) return res.json({"message": "music_id needed"});
             res.statusCode = 302;
             res.setHeader("Location", `../musics/${req.query.music_id}.mp3`); // for vercel
-            // res.setHeader("Location", `./musics/${req.query.music_id}.mp3`); // for localhost
             res.end();
         },
         read: async (req, res) => {
@@ -26,7 +25,9 @@ const controller = {
             })
         },
         list: async (req, res) => {
-            database.musicReadList(connection, 1).then((result) => {
+            let page = req.params.page;
+
+            database.musicReadList(connection, page).then((result) => {
                 if (result) res.json(result);
                 else res.json({"message": "no data available"});
             })

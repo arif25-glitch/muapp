@@ -9,10 +9,29 @@ const database = {
         readAll: async (connection, page) => {
             if (connection == null) return console.log("Connect first to database");
 
-            let result = await connection.db(databaseName).collection("general-playlist").find({}).toArray();
-        
-            if (result) return result;
-            else return false;
+            let dataLimitInPage = 2;
+
+            if (page) {
+                if ((page - 1) < 0) return {"message": "out of page"};
+
+                let startIndex = (page - 1) * dataLimitInPage;
+                let endIndex = page * dataLimitInPage;
+
+                let result = await connection.db(databaseName).collection("general-playlist").find({}).skip(startIndex).limit(dataLimitInPage).toArray();
+            
+                if (!(result.length > 0)) {
+                    result = {"message": "out of page"};
+                }
+
+                if (result) return result;
+                else return false;
+            } else {
+                let result = await connection.db(databaseName).collection("general-playlist").find({}).toArray();
+            
+                if (result) return result;
+                else return false;
+            }
+
         },
         read: async (connection, musicId) => {
             if (connection == null) return console.log("Connect first to database");

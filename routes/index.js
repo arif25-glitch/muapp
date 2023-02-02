@@ -5,11 +5,12 @@ const {controller} = require('../controller/route_controller');
 route.get("/api/music-play", controller.music.play);
 route.get("/api/music-read", controller.music.read);
 route.get("/api/music-list", controller.music.list);
+route.get("/api/music-list/:page", controller.music.list);
 route.get("/api/music-read-image", controller.music.readImage);
 
 // routing for user
 route.get("/api/user-read-all", controller.user.read_all);
-route.get("/api/user-playlist", controller.user.playlist);
+route.get("/api/user-playlist-all", controller.user.playlist);
 route.post("/api/user-create", controller.user.crud.create);
 route.post("/api/user-read", controller.user.crud.read);
 route.post("/api/user-update", controller.user.crud.update);
