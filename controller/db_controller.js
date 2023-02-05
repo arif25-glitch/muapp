@@ -124,7 +124,6 @@ const database = {
             let data = await connection.db(databaseName).collection("user").findOne({"_id": email});
 
             if (!data) return false;
-            console.log(SecureCrypto.decrypt(data.password));
             if (SecureCrypto.decrypt(data.password) == password) return true;
         }
     },
