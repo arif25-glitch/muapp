@@ -25,6 +25,7 @@ const readUserAccount = db_controller.user.read;
 const readAllUserAccount = db_controller.user.readAll;
 const updateUserAccount = db_controller.user.update;
 const deleteUserAccount = db_controller.user.delete;
+const validateUserAccount = db_controller.user.validate;
 
 const adminCreateMusic = db_controller.admin.musicCreate;
 
@@ -42,6 +43,7 @@ module.exports = {
     readAllUserAccount,
     updateUserAccount,
     deleteUserAccount,
+    validateUserAccount,
 
     adminCreateMusic
 };

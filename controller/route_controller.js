@@ -102,6 +102,18 @@ const controller = {
                     }
                 })
             }
+        },
+        validate: async (req, res) => {
+            let email = req.body.email;
+            let password = req.body.password;
+
+            if (email == null || password == null) return {"message": "email or password cannot be empty"};
+
+            database.validateUserAccount(connection, email, password)
+            .then((result) => {
+                if (result) res.json({"status": true});
+                else res.json({"status": false});
+            });
         }
     },
     admin: {

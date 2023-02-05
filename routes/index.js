@@ -15,6 +15,7 @@ route.post("/api/user-create", controller.user.crud.create);
 route.post("/api/user-read", controller.user.crud.read);
 route.post("/api/user-update", controller.user.crud.update);
 route.post("/api/user-delete", controller.user.crud.delete);
+route.post("/api/user-validate-login", controller.user.validate);
 
 // routing for admin
 route.post("/api/admin-music-create", controller.admin.crud.music.create);

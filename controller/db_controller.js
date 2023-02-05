@@ -2,6 +2,8 @@ const userFormat = require('../models/db_format/database_user_format');
 const userPlaylistFormat = require('../models/db_format/database_user_playlist_format');
 const generalPlaylistFormat = require('../models/db_format/database_general_playlist_format');
 
+const SecureCrypto = require('../models/data_encryption');
+
 var databaseName = "muapp";
 
 const database = {
@@ -115,6 +117,15 @@ const database = {
             });
             
             return result;
+        },
+        validate: async (connection, email, password) => {
+            if (connection == null ) return console.log("Connect first to database");
+
+            let data = await connection.db(databaseName).collection("user").findOne({"_id": email});
+
+            if (!data) return false;
+            console.log(SecureCrypto.decrypt(data.password));
+            if (SecureCrypto.decrypt(data.password) == password) return true;
         }
     },
     admin: {
