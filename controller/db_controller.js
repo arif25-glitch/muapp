@@ -43,12 +43,12 @@ const database = {
             }).reverse();
 
             results = results.map(x => {
-                
+                return x.data;
             });
 
             return {
                 // 'title': data[results.indexOf(Math.max(...results))]
-                'title': results
+                'results': results.slice(0, 3)
             };
         },
         readAll: async (connection, page) => {
