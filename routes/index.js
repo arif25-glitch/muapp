@@ -8,9 +8,14 @@ route.get("/api/music-list", controller.music.list);
 route.get("/api/music-list/:page", controller.music.list);
 route.get("/api/music-read-image", controller.music.readImage);
 
+// searching for a music - optimized by neural network
+route.get("/api/music-search/:search", controller.music.search)
+
 // routing for user
 route.get("/api/user-read-all", controller.user.read_all);
-route.get("/api/user-playlist-all", controller.user.playlist);
+route.get("/api/user-read-playlist", controller.user.playlist.read);
+route.get("/api/user-read-playlist/:page", controller.user.playlist.read);
+route.post("/api/user-create-playlist", controller.user.playlist.create);
 route.post("/api/user-create", controller.user.crud.create);
 route.post("/api/user-read", controller.user.crud.read);
 route.post("/api/user-update", controller.user.crud.update);

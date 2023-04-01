@@ -1,13 +1,56 @@
+// formats
 const userFormat = require('../models/db_format/database_user_format');
 const userPlaylistFormat = require('../models/db_format/database_user_playlist_format');
 const generalPlaylistFormat = require('../models/db_format/database_general_playlist_format');
 
+// mobile security
 const SecureCrypto = require('../models/data_encryption');
 
+// miscellaneous
+const stringSimilarity = require('string-similarity');
+
+// database
 var databaseName = "muapp";
 
 const database = {
     music: {
+        search: async(connection, searchText) => {
+            if (connection == null) return console.log("Cannot connect to database");
+
+            let data = await connection.db(databaseName).collection("general-playlist").find({}).toArray();
+
+            title = data.map(x => {
+                return x['title']
+            });
+
+            results = [];
+            for (let i = 0; i < title.length; i++) {
+                results.push({
+                    qVal: stringSimilarity.compareTwoStrings(searchText, title[i]),
+                    data: data[i]
+                });
+
+            }
+
+            results.sort((a, b) => {
+                if (a.qVal < b.qVal) {
+                    return -1;
+                }
+                if (a.qVal > b.qVal) {
+                    return 1;
+                }
+                return 0;
+            }).reverse();
+
+            results = results.map(x => {
+                
+            });
+
+            return {
+                // 'title': data[results.indexOf(Math.max(...results))]
+                'title': results
+            };
+        },
         readAll: async (connection, page) => {
             if (connection == null) return console.log("Connect first to database");
 
@@ -125,6 +168,25 @@ const database = {
 
             if (!data) return false;
             if (SecureCrypto.decrypt(data.password) == password) return true;
+
+            return false;
+        },
+        playlist: {
+            read: async (connection, email, page) => {
+                if (connection == null) return console.log("Database not connected");
+                
+                dataLimitPage = 5;
+
+                if (page) {
+                    let userData = await connection.db(databaseName).collection("user").findOne({"_id": email});
+
+                    
+                } else {
+
+                }
+
+                return {"msg": "ok"};
+            }
         }
     },
     admin: {

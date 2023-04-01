@@ -1,9 +1,26 @@
 const database = require('../models/database/database_config');
 
-const connection = database.createDBConnection();
+let connection = null
+database.createDBConnection()
+.then((result) => {
+    connection = result;
+})
 
 const controller = {
     music: {
+        search: async(req, res) => {
+            let search = req.params.search;
+            
+            database.musicSearch(connection, search).then((result) => {
+                if (result) {
+                    res.json(result);
+                } else {
+                    res.json({
+                        "message": "cannot find music"
+                    });
+                }
+            });
+        },
         play: async (req, res) => {
             if (req.query.music_id == null) return res.json({"message": "music_id needed"});
             res.statusCode = 302;
@@ -40,8 +57,28 @@ const controller = {
         }
     },
     user: {
-        playlist: async (req, res) => {
-            console.log(req.query.email);
+        playlist: {
+            read: async (req, res) => {
+                let page = req.params.page;
+                let email = req.query.email;
+
+                if (email == null) return res.json({"message": "need email!"});
+
+                database.readUserPlaylistAccount(connection, email, page)
+                .then((result) => {
+                    if (result) res.json(result);
+                    else res.json({"message": "no data available"});
+                });
+            },
+            create: async (req, res) => {
+
+            },
+            update: async (req, res) => {
+
+            },
+            delete: async (req, res) => {
+                
+            }
         },
         read_all: async (req, res) => {
             database.readAllUserAccount(connection).then((result) => {
